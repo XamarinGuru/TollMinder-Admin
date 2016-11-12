@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <md-button ui-sref="road({_id: wayPoint.wayPoint._tollRoad._id})"> to <strong>{{wayPoint.wayPoint._tollRoad.name}}</strong> </md-button>
+  <div layout="row" layout-align="space-between center">
+    <div>
+      <h2>Way Point: {{wayPoint.wayPoint.name}}</h2>
+      <i>Created at: {{wayPoint.wayPoint.createdAt | date}}</i><br/>
+      <i ng-show="wayPoint.wayPoint.updatedAt">Last update: {{wayPoint.wayPoint.updatedAt | date}}</i>
+    </div>
+    <md-button class="create" ng-click="wayPoint.showModal()">Create new Toll Point</md-button>
+  </div>
+  <hr>
+  <table md-table>
+    <thead md-head>
+    <tr md-row>
+      <th md-column><span>Toll Point</span></th>
+      <th md-column><span>Location</span></th>
+      <th md-column><span>Action</span></th>
+      <th md-column>Last update</th>
+      <th md-column md-numeric><span></span></th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row ng-repeat="tollPoint in wayPoint.wayPoint._tollPoints">
+      <td md-cell>{{tollPoint.name}}</td>
+      <td md-cell>{{tollPoint.locationView}}</td>
+      <td md-cell class="capitalize">{{tollPoint.action}}</td>
+      <td md-cell>{{tollPoint.updatedAt || tollPoint.createdAt | date}}</td>
+      <td md-cell>
+        <md-button class="md-icon-button"><i class="fa fa-edit" aria-hidden="true"></i></md-button>
+        <md-button class="md-icon-button"><i class="fa fa-trash-o" aria-hidden="true"></i></md-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </md-table-container>
+</div>

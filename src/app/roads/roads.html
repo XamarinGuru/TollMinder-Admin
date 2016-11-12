@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div>
+    <md-button class="create" ng-click="roads.showModal()">Create new Toll Road</md-button>
+  </div>
+  <table md-table>
+    <thead md-head md-order="roads.query.order" md-on-reorder="roads.getRoads">
+    <tr md-row>
+      <th md-column><span>Toll Road</span></th>
+      <th md-column md-numeric><span>Way Points</span></th>
+      <th md-column md-numeric><span></span></th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row ng-repeat="road in roads.roads">
+      <td md-cell><a ui-sref="road({_id: road._id})">{{road.name}}</a></td>
+      <td md-cell>{{road._wayPoints.length}}</td>
+      <td md-cell>
+        <md-button class="md-icon-button">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="roads.remove(road._id)">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </md-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </md-table-container>
+  <md-table-pagination md-limit="roads.query.limit" md-limit-options="[20,35,50]" md-page="roads.query.page" md-total="{{roads.roads.length}}" md-on-paginate="roads.getRoads" md-page-select></md-table-pagination>
+</div>
