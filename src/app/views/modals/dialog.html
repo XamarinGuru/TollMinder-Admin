@@ -1,0 +1,45 @@
+<md-dialog>
+  <form name="dialog.form" ng-submit="dialog.save()" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>{{dialog.upd ? "Update" : "Create new " + dialog.state.current.data.child }}</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="dialog.hide()">&#10005</md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container ng-repeat="field in dialog.schema">
+          <label class="capitalize">{{field.title}}</label>
+          <input ng-if="field.type != 'select'"
+                 type="{{field.type}}"
+                 name="{{field.title}}"
+                 ng-model="dialog.document[field.title]"
+                 ng-required="field.required || true">
+          <md-select ng-if="field.type == 'select'"
+                     ng-model="dialog.document[field.title]"
+                     name="{{field.title}}"
+                     ng-required="field.required || true"
+                     class="capitalize">
+            <md-option ng-repeat="option in field.options"
+                       ng-value="option"
+                       class="capitalize">
+              {{option}}
+            </md-option>
+          </md-select>
+          <div ng-messages="dialog.form[field.title].$error" multiple md-auto-hide="true">
+            <div ng-message="required">
+              This field required
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions class="modal-buttons" layout="row">
+      <md-button ng-click="dialog.hide()">Cancel</md-button>
+      <md-button type="submit">Save</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

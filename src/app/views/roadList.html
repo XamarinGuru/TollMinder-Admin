@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div>
+    <md-button class="create" ng-click="ctrl.showModal()">Create new Toll Road</md-button>
+  </div>
+  <table md-table>
+    <thead md-head>
+    <tr md-row>
+      <th md-column><span>Toll Road</span></th>
+      <th md-column md-numeric><span>Way Points</span></th>
+      <th md-column md-numeric><span></span></th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row ng-repeat="road in ctrl.roads">
+      <td md-cell><a ui-sref="tollRoad({_id: road._id})">{{road.name}}</a></td>
+      <td md-cell>{{road._wayPoints.length}}</td>
+      <td md-cell>
+        <md-button class="md-icon-button" ng-click="ctrl.showModal(road)">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="ctrl.remove(road._id)">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </md-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </md-table-container>
+  <md-table-pagination md-limit-options="[20,35,50]" md-total="{{ctrl.roads.length}}"></md-table-pagination>
+</div>

@@ -1,18 +1,13 @@
-export class RoadsController {
-  constructor($mdDialog, $log, RoadService, $state) {
+export class RoadListController {
+  constructor($mdDialog, $log, CrudService, $state) {
     'ngInject';
 
     this.dialog = $mdDialog;
     this.log = $log;
-    this.Road = RoadService;
+    this.CRUD = CrudService;
     this.state = $state;
 
     this.roads = [];
-    this.query = {
-      order: 'name',
-      limit: 30,
-      page: 1
-    };
 
     //init
 
@@ -20,18 +15,21 @@ export class RoadsController {
   }
 
   getRoads() {
-    this.Road.get()
+    this.CRUD.get('tollRoad')
     .then(roads => this.roads = roads.data)
     .catch(this.log.debug);
   }
 
-  showModal(ev) {
+  showModal(data) {
     this.dialog.show({
-      controller: 'NewRoadController',
+      controller: 'DialogController',
       controllerAs: 'dialog',
-      templateUrl: 'app/modals/newRoad.html',
-      targetEvent: ev,
-      clickOutsideToClose:true
+      templateUrl: 'app/views/modals/dialog.html',
+      clickOutsideToClose:true,
+      bindToController: true,
+      locals : {
+        data: data
+      }
     })
   }
 
@@ -43,7 +41,7 @@ export class RoadsController {
     .cancel('No');
 
     this.dialog.show(confirm)
-    .then(() => this.Road.remove(_id))
+    .then(() => this.CRUD.remove('tollRoad', _id))
     .then(() => this.state.reload())
     .catch(() => this.log.debug('canceled'));
   }

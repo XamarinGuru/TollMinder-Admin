@@ -84,6 +84,14 @@ md-toolbar.md-default-theme {
   }
 }
 
+md-input-container {
+  width: 100%;
+}
+
+md-dialog {
+  max-width: 400px;
+}
+
 .modal-buttons {
   justify-content: space-between;
 }

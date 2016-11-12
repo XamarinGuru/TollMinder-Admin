@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <md-button ng-if="ctrl.state.current.name == 'tollRoad'"
+             ui-sref="roadList">to road list</md-button>
+  <md-button ng-if="ctrl.state.current.name == 'wayPoint'"
+             ui-sref="tollRoad({_id: ctrl.data._tollRoad._id})">to {{ctrl.data._tollRoad.name}}</md-button>
+  <div layout="row" layout-align="space-between center">
+    <div>
+      <h2><strong class="capitalize">{{ctrl.state.current.name}}</strong> : {{ctrl.data.name}}</h2>
+      <i>Created at: {{ctrl.data.createdAt | date}}</i><br/>
+      <i ng-if="ctrl.data.updatedAt">Last update: {{ctrl.data.updatedAt | date}}</i>
+    </div>
+    <md-button class="create" ng-click="ctrl.showModal()">
+      Create new {{ctrl.state.current.data.child}}
+    </md-button>
+  </div>
+  <hr>
+  <table md-table>
+    <thead md-head>
+    <tr md-row>
+      <th md-column ng-repeat="title in ctrl.state.current.data.thead"><span>{{title}}</span></th>
+      <th md-column md-numeric><span></span></th>
+    </tr>
+    </thead>
+    <tbody md-body>
+    <tr md-row
+        ng-repeat="row in ctrl.data[ctrl.mappingField] track by row._id">
+      <td md-cell
+          ng-repeat="cell in ctrl.state.current.data.tbody"
+          class="capitalize">
+        <a ng-href="{{ctrl.state.href(ctrl.state.current.data.child, {_id : row._id})}}"
+           ng-if="cell == 'name'">
+          {{row[cell]}}
+        </a>
+        <span ng-if="cell !== 'name'">{{row[cell]}}</span>
+      </td>
+      <td md-cell>
+        <md-button class="md-icon-button" ng-click="ctrl.showModal(row)">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="ctrl.remove(row._id)">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </md-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </md-table-container>
+</div>
