@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <md-card>
+    <form name="ctrl.form"
+          ng-submit="ctrl.signin()"
+          novalidate>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Login</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-input-container>
+          <label>Username</label>
+          <input type="text"
+                 name="username"
+                 ng-model="ctrl.username"
+                 required>
+          <div ng-messages="ctrl.form.username.$error">
+            <div ng-message="required">
+              This field is required
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Password</label>
+          <input type="password"
+                 name="password"
+                 ng-model="ctrl.password"
+                 required>
+          <div ng-messages="ctrl.form.password.$error">
+            <div ng-message="required">
+              This field is required
+            </div>
+          </div>
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button type="submit">Sign in</md-button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>

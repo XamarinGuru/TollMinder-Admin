@@ -2,6 +2,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $urlRouterProvider.html5Mode = true;
   $stateProvider
+  .state('login', {
+    url: '/login',
+    templateUrl: 'app/views/login.html',
+    controller: 'LoginController',
+    controllerAs: 'ctrl'
+  })
   .state('roadList', {
     url: '/',
     templateUrl: 'app/views/roadList.html',
