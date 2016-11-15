@@ -4,11 +4,13 @@
           ng-submit="ctrl.signin()"
           novalidate>
       <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Login</span>
+        <md-card-title-text layout="row" layout-align="space-between center">
+          <div class="md-headline">Login</div>
+          <div class="error" ng-show="ctrl.err">{{ctrl.err}}</div>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
+
         <md-input-container>
           <label>Username</label>
           <input type="text"

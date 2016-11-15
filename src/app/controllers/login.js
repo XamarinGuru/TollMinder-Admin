@@ -1,18 +1,22 @@
 export class LoginController {
-  constructor(USERNAME, PASSWORD, $state) {
+  constructor(LoginService, $state, $log) {
     'ngInject';
-
-    this.constants = {USERNAME, PASSWORD};
     this.state = $state;
+    this.Login = LoginService;
+    this.log = $log;
 
     this.username = '';
     this.password = '';
   }
 
   signin() {
-    if(this.constants.USERNAME == this.username && this.constants.PASSWORD == this.password) {
-      localStorage.auth = true;
-      this.state.go('roadList');
+    if (this.form.$valid) {
+      this.Login.auth(this.username, this.password)
+      .then(response => {
+        localStorage.authToken = response.data.token;
+        this.state.go('roadList');
+      })
+      .catch(response => this.err = response.data.err);
     }
   }
 }

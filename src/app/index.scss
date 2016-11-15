@@ -67,12 +67,31 @@ i {
   color: #666;
 }
 
+.rootHeader {
+  background-color: #607d8b;
+  .md-button, h2 {
+    padding: 0 20px;
+    color: white;
+  }
+}
+
 .capitalize {
   text-transform: capitalize;
 }
 
 md-toolbar.md-default-theme {
   background-color: black;
+}
+
+.error {
+  color: firebrick;
+  background-color: rgba(0,0,0,.05);
+  padding: 20px;
+  -webkit-transition: display 1s;
+  -moz-transition: display 1s;
+  -ms-transition: display 1s;
+  -o-transition: display 1s;
+  transition: display 1s;
 }
 
 .wrapper {

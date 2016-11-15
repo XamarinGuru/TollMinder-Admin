@@ -1,10 +1,10 @@
 export function runBlock ($log, $rootScope, $state ) {
   'ngInject';
 
-  $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
-    if (!localStorage.auth) {
+  $rootScope.$on('$stateChangeSuccess', () => {
+    if (!localStorage.authToken) {
       $state.go('login');
     }
   });
   $log.debug('runBlock end');
-};
+}
