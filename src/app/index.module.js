@@ -10,7 +10,7 @@ import {CrudService} from './services/crud';
 
 angular.module('tollminderAdmin',
   ['ngSanitize', 'ngMessages', 'ui.router', 'ngMaterial', "md.data.table"])
-.constant('API', 'http://54.152.103.212') // http://192.168.13.168:7000
+.constant('API', 'http://54.152.103.212/api') // http://192.168.13.168:7000
 .constant('USERNAME', 'admin')
 .constant('PASSWORD', '1234')
 .config(config)
