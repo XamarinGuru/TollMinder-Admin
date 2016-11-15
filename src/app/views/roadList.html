@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody md-body>
-    <tr md-row ng-repeat="road in ctrl.roads">
+    <tr md-row ng-repeat="road in ctrl.roads | limitTo: ctrl.limit: (ctrl.page - 1) * ctrl.limit">
       <td md-cell><a ui-sref="tollRoad({_id: road._id})">{{road.name}}</a></td>
       <td md-cell>{{road._wayPoints.length}}</td>
       <td md-cell>
@@ -26,5 +26,9 @@
     </tbody>
   </table>
   </md-table-container>
-  <md-table-pagination md-limit-options="[20,35,50]" md-total="{{ctrl.roads.length}}"></md-table-pagination>
+  <md-table-pagination md-limit-options="[20,35,50]"
+                       md-limit="ctrl.limit"
+                       md-page="ctrl.page"
+                       md-total="{{ctrl.roads.length}}">
+  </md-table-pagination>
 </div>

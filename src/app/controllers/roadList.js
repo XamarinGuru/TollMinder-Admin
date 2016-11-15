@@ -8,6 +8,8 @@ export class RoadListController {
     this.state = $state;
 
     this.roads = [];
+    this.limit = 20;
+    this.page = 1;
 
     //init
 
