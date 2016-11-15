@@ -14,8 +14,8 @@ import {CrudService} from './services/crud';
 angular.module('tollminderAdmin',
   ['ngSanitize', 'ngMessages', 'ui.router', 'ngMaterial', "md.data.table"])
 
-//.constant('API', 'http://54.152.103.212/api')
-.constant('API', 'http://localhost:7000/api')
+.constant('API', 'http://54.152.103.212/api')
+//.constant('API', 'http://localhost:7000/api')
 
 .config(config)
 .config(routerConfig)
