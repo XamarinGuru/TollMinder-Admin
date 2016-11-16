@@ -1,5 +1,5 @@
 export class EntityController {
-  constructor($mdDialog, $log, CrudService, $state, NgMap, $timeout) {
+  constructor($mdDialog, $log, CrudService, $state, NgMap, $timeout, G_API_Key) {
     'ngInject';
 
     this.dialog = $mdDialog;
@@ -12,7 +12,7 @@ export class EntityController {
     .then((map) => {
       this.map = map;
     });
-    this.googleMapsUrl = 'https://maps.google.com/maps/api/js';
+    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}`;
     this.pauseLoading=true;
     $timeout(() => { this.pauseLoading=false }, 2000);
 

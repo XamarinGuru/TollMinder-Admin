@@ -1,5 +1,5 @@
 export class DialogController {
-  constructor($mdDialog, CrudService, $state, $log, NgMap, $timeout) {
+  constructor($mdDialog, CrudService, $state, $log, NgMap, $timeout, G_API_Key) {
     'ngInject';
     this.upd = this.data ? true : false;
     this.dialog = $mdDialog;
@@ -8,7 +8,7 @@ export class DialogController {
     this.log = $log;
     this.Map = NgMap;
 
-    this.googleMapsUrl = 'https://maps.google.com/maps/api/js';
+    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}`;
     this.pauseLoading = true;
     $timeout(() => {
       this.Map.getMap()
