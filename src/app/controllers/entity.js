@@ -1,18 +1,24 @@
 export class EntityController {
-  constructor($mdDialog, $log, CrudService, $state) {
+  constructor($mdDialog, $log, CrudService, $state, NgMap, $timeout) {
     'ngInject';
 
     this.dialog = $mdDialog;
     this.log = $log;
     this.state = $state;
     this.CRUD = CrudService;
+
+    this.Map = NgMap;
+    this.Map.getMap()
+    .then((map) => {
+      this.map = map;
+    });
+    this.googleMapsUrl = 'https://maps.google.com/maps/api/js';
+    this.pauseLoading=true;
+    $timeout(() => { this.pauseLoading=false }, 2000);
+
     this.mappingField = null;
     this.data = {};
-
-    this.log.debug(this.state);
-
     //init
-
     this.getEntity();
   }
 
@@ -51,4 +57,6 @@ export class EntityController {
     .then(() => this.state.reload())
     .catch(() => this.log.debug('canceled'));
   }
+
+
 }
