@@ -35,7 +35,7 @@
             </div>
           </div>
         </md-input-container>
-        <div ng-if="dialog.state.current.name !== 'roadList'"></div>
+        <div ng-if="dialog.state.current.name !== 'roadList'">
           <div class="loader"
                ng-if="dialog.pauseLoading"
                layout="row"
@@ -46,7 +46,7 @@
           </div>
           <div class="map" ng-if="!dialog.pauseLoading">
             <div map-lazy-load="https://maps.google.com/maps/api/js"
-                 map-lazy-load-params="{{dialog.googleMapsUrl}}" >
+                 map-lazy-load-params="{{dialog.googleMapsUrl}}">
               <ng-map zoom="4"
                       disable-default-u-i="true"
                       center="40.71395583, -101.38183594"
@@ -58,6 +58,7 @@
               </ng-map>
             </div>
           </div>
+        </div>
       </div>
     </md-dialog-content>
 

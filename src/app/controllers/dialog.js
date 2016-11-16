@@ -30,6 +30,8 @@ export class DialogController {
       if (this.document.hasOwnProperty('latitude')) this.document.latitude = event.latLng.lat();
       if (this.document.hasOwnProperty('longitude')) this.document.longitude = event.latLng.lng();
     };
+
+    this.log.debug(this.state.current.name);
   }
   save() {
     if (this.form.$valid) {
