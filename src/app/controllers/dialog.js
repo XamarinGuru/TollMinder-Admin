@@ -1,6 +1,8 @@
 export class DialogController {
   constructor($mdDialog, CrudService, $state, $log, NgMap, $timeout, G_API_Key) {
     'ngInject';
+
+    let self = this;
     this.upd = this.data ? true : false;
     this.dialog = $mdDialog;
     this.CRUD = CrudService;
@@ -8,7 +10,7 @@ export class DialogController {
     this.log = $log;
     this.Map = NgMap;
 
-    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}`;
+    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}&libraries=places`;
     this.pauseLoading = true;
     $timeout(() => {
       this.Map.getMap()
@@ -18,6 +20,8 @@ export class DialogController {
       });
     }, 2000);
 
+
+    this.search = '';
     this.schema = this.state.current.data.schema;
     this.document = {
       [`_${this.state.current.name}`] : this.state.params._id
@@ -30,6 +34,13 @@ export class DialogController {
       if (this.document.hasOwnProperty('latitude')) this.document.latitude = event.latLng.lat();
       if (this.document.hasOwnProperty('longitude')) this.document.longitude = event.latLng.lng();
     };
+
+    this.placeChanged = function (){
+      self.place = this.getPlace();
+      self.document.latitude = self.place.geometry.location.lat();
+      self.document.longitude = self.place.geometry.location.lng();
+
+    }
 
     this.log.debug(this.state.current.name);
   }
@@ -48,4 +59,7 @@ export class DialogController {
   hide() {
     this.dialog.hide();
   }
+
+
+
 }

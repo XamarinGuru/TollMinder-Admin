@@ -12,7 +12,7 @@ export class EntityController {
     .then((map) => {
       this.map = map;
     });
-    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}`;
+    this.googleMapsUrl = `https://maps.google.com/maps/api/js?key=${G_API_Key}&libraries=places`;
     this.pauseLoading=true;
     $timeout(() => { this.pauseLoading=false }, 2000);
 

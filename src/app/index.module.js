@@ -20,8 +20,8 @@ angular.module('tollminderAdmin',
     'ngMap'
   ])
 
-.constant('API', 'http://54.152.103.212/api')
-//.constant('API', 'http://localhost:7000/api')
+// .constant('API', 'http://54.152.103.212/api')
+.constant('API', 'http://localhost:7000/api')
 .constant('G_API_Key', 'AIzaSyA3bW45fzOFxRkt23VXQlG0W7Oy9Ud8M_g')
 
 .config(config)

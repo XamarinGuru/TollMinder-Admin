@@ -28,7 +28,6 @@
       <ng-map zoom="12"
               zoom-to-include-markers="auto"
               disable-default-u-i="true"
-              ng-model="ctrl.mapObject"
               center="{{ctrl.data[ctrl.mappingField][0].latitude}}, {{ctrl.data[ctrl.mappingField][0].longitude}}"
               on-click="ctrl.click()">
         <marker ng-repeat="point in ctrl.data[ctrl.mappingField]"

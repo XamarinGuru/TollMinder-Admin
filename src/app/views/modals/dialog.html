@@ -44,12 +44,21 @@
                                   md-diameter="70">
             </md-progress-circular>
           </div>
+          <md-input-container class="search-field">
+            <input type="text"
+                   places-auto-complete
+                   component-restrictions="{country:'ua'}"
+                   types="['address']"
+                   ng-model="dialog.search"
+                   on-place-changed="dialog.placeChanged()">
+          </md-input-container>
           <div class="map" ng-if="!dialog.pauseLoading">
             <div map-lazy-load="https://maps.google.com/maps/api/js"
                  map-lazy-load-params="{{dialog.googleMapsUrl}}">
-              <ng-map zoom="4"
+              <ng-map zoom="12"
+                      zoom-to-include-markers='auto'
                       disable-default-u-i="true"
-                      center="40.71395583, -101.38183594"
+                      center="{{dialog.search}}"
                       on-click="dialog.clickOnMap()">
                 <marker position="{{dialog.document.latitude}}, {{dialog.document.longitude}}"
                         ng-if="dialog.document.latitude != 0 && dialog.document.longitude != 0"

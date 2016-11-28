@@ -112,7 +112,7 @@ md-input-container {
 }
 
 md-dialog {
-  max-width: 400px;
+  max-width: 600px;
   .loader, .map {
     height: 275px;
   }
@@ -133,6 +133,11 @@ md-dialog {
     justify-content: center;
     align-items: center;
   }
+}
+
+.search-field {
+  margin-bottom: -25px;
+  margin-top: -15px;
 }
 
 /**

@@ -55,6 +55,5 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     }
   });
 
-
   $urlRouterProvider.otherwise('/');
 }
