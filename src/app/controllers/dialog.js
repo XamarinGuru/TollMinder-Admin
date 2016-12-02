@@ -59,7 +59,4 @@ export class DialogController {
   hide() {
     this.dialog.hide();
   }
-
-
-
 }

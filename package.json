@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "dependencies": {},
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "build": "gulp clean && gulp build",
+    "deploy" : "./deploy.sh",
+    "buildAndDeploy": "npm run build && npm run deploy"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
