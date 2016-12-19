@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <div class="load" ng-show="!ctrl.load">
+    <md-progress-circular md-diameter="96" class="md-warn"></md-progress-circular>
+  </div>
+  <div layout="row" layout-align="space-between center">
+    <md-input-container class="matrix-select">
+      <span ng-if="ctrl.matrixes.length == 0"></span>
+      <md-select ng-if="ctrl.matrixes.length > 0"
+                 ng-model="ctrl._selectedMatrix"
+                 ng-change="ctrl.selectMatrix()"
+                 class="capitalize">
+        <md-option ng-repeat="option in ctrl.matrixes"
+                   ng-value="option._id"
+                   ng-selected="$index == 0"
+                   class="capitalize">
+          {{option.name}}
+        </md-option>
+    </md-input-container>
+    <div>
+      <md-button ng-click="ctrl.showModal()"
+                 class="save-button md-raised">
+        Add matrix
+      </md-button>
+      <md-button ng-click="ctrl.removeMatrix()"
+                 ng-if="ctrl.matrixes.length > 0"
+                 class="delete-button md-raised">
+        Delete
+      </md-button>
+    </div>
+  </div>
+  <div ng-if="ctrl.matrixes.length == 0">
+    Not yet created any matrix.
+  </div>
+  <div layout="row" layout-align="center center">
+    <h3 class="end-trip">End trip</h3>
+  </div>
+  <div class="rates"
+  ng-if="ctrl.matrixes.length > 0">
+    <h3 class="start-trip">Start trip</h3>
+    <table>
+      <tr>
+        <th class="empty"></th>
+        <th ng-repeat="title in ctrl.currentMatrix._wayPoints track by title._id">
+          {{title.name}}
+        </th>
+      </tr>
+      <tr ng-repeat="start in ctrl.currentMatrix._wayPoints track by start._id">
+        <th>{{start.name}}</th>
+        <td ng-repeat="end in ctrl.currentMatrix._wayPoints track by end._id"
+            ng-init="id = start._id + '|' + end._id"
+            ng-class="(start._id == end._id) ? 'empty' : ''">
+          <md-button class="edit-rate md-icon-button"
+                     ng-if="start._id != end._id"
+                     ng-show="!ctrl.rates[id].editMode"
+                     ng-click="ctrl.toggleEditMode(id)">
+            <i class="fa fa-edit"></i>
+          </md-button>
+          <md-button class="edit-rate md-icon-button"
+                     ng-if="start._id != end._id"
+                     ng-show="ctrl.rates[id].editMode"
+                     ng-click="ctrl.saveRate(id)">
+            <i class="fa fa-save"></i>
+          </md-button>
+          <md-input-container ng-if="start._id != end._id">
+            <i class="fa fa-dollar"></i>
+            <input type="number"
+                   step="0.10"
+                   min="0"
+                   name="input{{id}}"
+                   required
+                   ng-disabled="!ctrl.rates[id].editMode"
+                   ng-model="ctrl.rates[id].cost">
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<md-button id="hiddenModalButton" style="display: none" ng-click="ctrl.showModal(null, false)">
+  Maximize modal
+</md-button>

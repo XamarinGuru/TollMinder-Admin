@@ -8,3 +8,5 @@ export function runBlock ($log, $rootScope, $state ) {
   });
   $log.debug('runBlock end');
 }
+
+// TODO loader to autocomplit

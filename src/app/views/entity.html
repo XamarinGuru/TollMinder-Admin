@@ -1,4 +1,7 @@
 <div class="wrapper">
+  <div class="load" ng-show="!ctrl.load">
+    <md-progress-circular md-diameter="96" class="md-warn"></md-progress-circular>
+  </div>
   <md-button ng-if="ctrl.state.current.name == 'tollRoad'"
              ui-sref="roadList">to road list</md-button>
   <md-button ng-if="ctrl.state.current.name == 'wayPoint'"
@@ -9,7 +12,7 @@
       <i>Created at: {{ctrl.data.createdAt | date}}</i><br/>
       <i ng-if="ctrl.data.updatedAt">Last update: {{ctrl.data.updatedAt | date}}</i>
     </div>
-    <md-button class="create" ng-click="ctrl.showModal()">
+    <md-button class="create" ng-click="ctrl.showModal(null, true)">
       Create new {{ctrl.state.current.data.child}}
     </md-button>
   </div>
@@ -27,7 +30,6 @@
          map-lazy-load-params="{{ctrl.googleMapsUrl}}" >
       <ng-map zoom="12"
               zoom-to-include-markers="auto"
-              disable-default-u-i="true"
               center="{{ctrl.data[ctrl.mappingField][0].latitude}}, {{ctrl.data[ctrl.mappingField][0].longitude}}"
               on-click="ctrl.click()">
         <marker ng-repeat="point in ctrl.data[ctrl.mappingField]"
@@ -57,10 +59,10 @@
         <span ng-if="cell !== 'name'">{{row[cell]}}</span>
       </td>
       <td md-cell>
-        <md-button class="md-icon-button" ng-click="ctrl.showModal(row)">
+        <md-button class="md-icon-button" ng-click="ctrl.showModal(row, true)">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </md-button>
-        <md-button class="md-icon-button" ng-click="ctrl.remove(row._id)">
+        <md-button class="md-icon-button" ng-click="ctrl.remove(row._id, $index)">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
         </md-button>
       </td>
@@ -69,3 +71,6 @@
   </table>
   </md-table-container>
 </div>
+<md-button id="hiddenModalButton" style="display: none" ng-click="ctrl.showModal(null, false)">
+  Maximize modal
+</md-button>

@@ -18,7 +18,7 @@
         <md-button class="md-icon-button" ng-click="ctrl.showModal(road)">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </md-button>
-        <md-button class="md-icon-button" ng-click="ctrl.remove(road._id)">
+        <md-button class="md-icon-button" ng-click="ctrl.remove(road._id, $index)">
           <i class="fa fa-trash-o" aria-hidden="true"></i>
         </md-button>
       </td>
@@ -26,9 +26,12 @@
     </tbody>
   </table>
   </md-table-container>
-  <md-table-pagination md-limit-options="[20,35,50]"
+  <md-table-pagination md-limit-options="[5,10,15,20]"
                        md-limit="ctrl.limit"
                        md-page="ctrl.page"
                        md-total="{{ctrl.roads.length}}">
   </md-table-pagination>
 </div>
+<md-button id="hiddenModalButton" style="display: none" ng-click="ctrl.showModal(null, false)">
+  Maximize modal
+</md-button>

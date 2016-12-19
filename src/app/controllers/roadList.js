@@ -8,7 +8,7 @@ export class RoadListController {
     this.state = $state;
 
     this.roads = [];
-    this.limit = 20;
+    this.limit = 5;
     this.page = 1;
 
     //init
@@ -35,7 +35,7 @@ export class RoadListController {
     })
   }
 
-  remove(_id) {
+  remove(_id, index) {
     let confirm = this.dialog.confirm()
     .title('Are you sure?')
     .textContent('Would you like to delete this road?')
@@ -44,7 +44,7 @@ export class RoadListController {
 
     this.dialog.show(confirm)
     .then(() => this.CRUD.remove('tollRoad', _id))
-    .then(() => this.state.reload())
+    .then(() => this.roads.splice(index, 1))
     .catch(() => this.log.debug('canceled'));
   }
 }

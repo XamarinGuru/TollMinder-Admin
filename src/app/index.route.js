@@ -51,9 +51,17 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       ],
       thead: ['Toll Point name', 'Latitude', 'Longitude', 'Action'],
       tbody: ['name', 'latitude', 'longitude', 'action'],
-      child: 'tollPoint'
+      child: 'tollPoint',
+      back: 'home'
     }
+  })
+  .state('rates', {
+    url: '/rates',
+    templateUrl: 'app/views/rates.html',
+    controller: 'RatesController',
+    controllerAs: 'ctrl',
   });
+
 
   $urlRouterProvider.otherwise('/');
 }
