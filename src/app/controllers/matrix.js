@@ -8,8 +8,12 @@ export class MatrixController extends MainDialogController {
     this.CRUD = CrudService;
     this.log = $log;
     this.dialog = $mdDialog;
-    this.selectedPoints = [];
-    for (let i=0; i<2; i++) this.addPoint();
+    this.startWayPoints = [];
+    this.endWayPoints = [];
+    for (let i=0; i<2; i++) {
+      this.addEndPoint();
+      this.addStartPoint();
+    }
 
     this.load = true;
     this.getPoints();
@@ -17,16 +21,23 @@ export class MatrixController extends MainDialogController {
 
   getPoints() {
     this.CRUD.get('wayPoint')
-    .then(res => this.points = res.data)
+    .then(res => {
+      this.points = res.data;
+      let state = false;
+      this.points.forEach(point => {
+        if (point.name === 'Unknown') state = true;
+      });
+      if (!state) this.points.push({ name: 'Unknown'});
+    })
     .catch(this.log.debug);
   }
 
-  querySearch(query) {
+  querySearch(query, selectedPoints) {
     if (this.points) {
       return this.points
       .filter(this.createFilterFor(query))
       .filter(item => {
-        for (let point of this.selectedPoints) {
+        for (let point of selectedPoints) {
           if (point.object && point.object._id == item._id) return false;
         }
         return true;
@@ -36,30 +47,37 @@ export class MatrixController extends MainDialogController {
 
   createFilterFor(query) {
     if (!query) return () => true;
-    var lowercaseQuery = angular.lowercase(query);
+    let lowercaseQuery = angular.lowercase(query);
     return (item) => angular.lowercase(item.name).indexOf(lowercaseQuery) === 0
   }
-
-  addPoint() {
-    this.selectedPoints.push(new PointForMatrix)
+  addStartPoint() {
+    this.startWayPoints.push(new PointForMatrix);
+  }
+  addEndPoint() {
+    this.endWayPoints.push(new PointForMatrix);
   }
 
-  deletePoint(index) {
+  deleteStartPoint(index, ) {
     this.log.debug(index);
-    if (this.selectedPoints.length > 2) this.selectedPoints.splice(index, 1)
+    if (this.startWayPoints.length > 1) this.startWayPoints.splice(index, 1)
+  }
+  deleteEndPoint(index, ) {
+    this.log.debug(index);
+    if (this.endWayPoints.length > 1) this.endWayPoints.splice(index, 1)
   }
 
   save() {
     if (this.form.$valid) {
       let matrix = {
-        name : this.name,
-        wayPoints : this.selectedPoints.map(item => item.object._id)
-      }
+        name: this.name,
+        startWayPoints: this.startWayPoints.map(item => item.object._id ? item.object._id : item.object.name),
+        endWayPoints: this.endWayPoints.map(item => item.object._id ? item.object._id : item.object.name)
+      };
       this.CRUD.save('matrix', matrix)
       .then(res => {
         this.dialog.hide();
         this.state.reload();
-      })
+      });
     }
   }
 }
