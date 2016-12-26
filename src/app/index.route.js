@@ -47,10 +47,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         {title: 'name', value: '', type: 'text'},
         {title: 'latitude', value: 0, type: 'number'},
         {title: 'longitude', value: 0, type: 'number'},
+        {title: 'radius', value: 0, type: 'number'},
         {title: 'action', value: 'exit', type: 'select', options: ['entrance','bridge','exit']}
       ],
-      thead: ['Toll Point name', 'Latitude', 'Longitude', 'Action'],
-      tbody: ['name', 'latitude', 'longitude', 'action'],
+      thead: ['Toll Point name', 'Latitude', 'Longitude', 'Radius', 'Action'],
+      tbody: ['name', 'latitude', 'longitude', 'radius', 'action'],
       child: 'tollPoint',
       back: 'home'
     }
