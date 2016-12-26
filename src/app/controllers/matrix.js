@@ -23,11 +23,11 @@ export class MatrixController extends MainDialogController {
     this.CRUD.get('wayPoint')
     .then(res => {
       this.points = res.data;
-      let state = false;
-      this.points.forEach(point => {
-        if (point.name === 'Unknown') state = true;
-      });
-      if (!state) this.points.push({ name: 'Unknown'});
+      // let state = false;
+      // this.points.forEach(point => {
+      //   if (point.name === 'Unknown') state = true;
+      // });
+      // if (!state) this.points.push({ name: 'Unknown'});
     })
     .catch(this.log.debug);
   }
