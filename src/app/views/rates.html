@@ -40,13 +40,13 @@
     <table>
       <tr>
         <th class="empty"></th>
-        <th ng-repeat="title in ctrl.currentMatrix._wayPoints track by title._id">
+        <th ng-repeat="title in ctrl.currentMatrix._endWayPoints track by title._id">
           {{title.name}}
         </th>
       </tr>
-      <tr ng-repeat="start in ctrl.currentMatrix._wayPoints track by start._id">
+      <tr ng-repeat="start in ctrl.currentMatrix._startWayPoints track by start._id">
         <th>{{start.name}}</th>
-        <td ng-repeat="end in ctrl.currentMatrix._wayPoints track by end._id"
+        <td ng-repeat="end in ctrl.currentMatrix._endWayPoints track by end._id"
             ng-init="id = start._id + '|' + end._id"
             ng-class="(start._id == end._id) ? 'empty' : ''">
           <md-button class="edit-rate md-icon-button"

@@ -25,45 +25,93 @@
             <div ng-message="required">This field is required</div>
           </div>
         </md-input-container>
-        <div ng-repeat="point in dialog.selectedPoints track by $index"
-             class="wayPointWrapper"
-             ng-init="i = $index">
-          <md-autocomplete class="matrix-autocomplete"
-                           md-required="dialog.selectedPoints.length <= 2"
-                           md-input-name="wayPoint{{i}}"
-                           md-autoselect
-                           md-no-cache="true"
-                           md-selected-item="dialog.selectedPoints[$index].object"
-                           md-search-text="point.searchText"
-                           md-items="item in dialog.querySearch(point.searchText)"
-                           md-item-text="item.name"
-                           md-min-length="0"
-                           md-require-match
-                           md-floating-label="WayPoint {{i+1}}">
-            <md-item-template>
-              <span md-highlight-text="point.searchText">{{item.name + " (" + item._tollRoad.name + ")"}}</span>
-            </md-item-template>
-            <div ng-messages="dialog.form['wayPoint' + i].$error"
-                 ng-if="dialog.form['wayPoint' + i].$touched">
-              <div ng-message="md-require-match">Please select an existing WayPoint.</div>
-              <div ng-message="md-required">Please select an existing WayPoint.</div>
+        <div layout="row" layout-align="space-between start">
+
+          <div>
+            <h3>Choose start WayPoints</h3>
+            <div ng-repeat="point in dialog.startWayPoints track by $index"
+                 class="wayPointWrapper"
+                 ng-init="i = $index">
+              <md-autocomplete class="matrix-autocomplete"
+                               md-required="dialog.startWayPoints.length <= 2"
+                               md-input-name="wayPoint{{i}}"
+                               md-autoselect
+                               md-no-cache="true"
+                               md-selected-item="dialog.startWayPoints[$index].object"
+                               md-search-text="point.searchText"
+                               md-items="item in dialog.querySearch(point.searchText, dialog.startWayPoints)"
+                               md-item-text="item.name"
+                               md-min-length="0"
+                               md-require-match
+                               md-floating-label="WayPoint {{i+1}}">
+                <md-item-template>
+                  <span md-highlight-text="point.searchText">{{item.name + " (" + item._tollRoad.name + ")"}}</span>
+                </md-item-template>
+                <div ng-messages="dialog.form['wayPoint' + i].$error"
+                     ng-if="dialog.form['wayPoint' + i].$touched">
+                  <div ng-message="md-require-match">Please select an existing WayPoint.</div>
+                  <div ng-message="md-required">Please select an existing WayPoint.</div>
+                </div>
+              </md-autocomplete>
+              <i ng-show="dialog.startWayPoints.length > 2 || (dialog.startWayPoints.length > 1 && dialog.endWayPoints.length >= 2)"
+                 md-no-asterisk
+                 ng-click="dialog.deleteStartPoint(i)"
+                 class="fa fa-trash"></i>
             </div>
-          </md-autocomplete>
-          <i ng-show="dialog.selectedPoints.length > 2"
-             md-no-asterisk
-             ng-click="dialog.deletePoint(i)"
-             class="fa fa-trash"></i>
+            <div layout="row" layout-align="start center">
+              <span></span>
+              <md-button ng-click="dialog.addStartPoint()"
+                         ng-show="dialog.startWayPoints.length != dialog.points.length">
+                Add start WayPoint to matrix
+              </md-button>
+            </div>
+            <!--<pre>
+              {{dialog.selectedPoints | json}}
+            </pre>-->
+          </div>
+          <div>
+            <h3>Choose end WayPoints</h3>
+            <div ng-repeat="point in dialog.endWayPoints track by $index"
+                 class="wayPointWrapper"
+                 ng-init="i = $index">
+              <md-autocomplete class="matrix-autocomplete"
+                               md-required="dialog.endWayPoints.length <= 2"
+                               md-input-name="wayPoint{{i}}"
+                               md-autoselect
+                               md-no-cache="true"
+                               md-selected-item="dialog.endWayPoints[$index].object"
+                               md-search-text="point.searchText"
+                               md-items="item in dialog.querySearch(point.searchText, dialog.endWayPoints)"
+                               md-item-text="item.name"
+                               md-min-length="0"
+                               md-require-match
+                               md-floating-label="WayPoint {{i+1}}">
+                <md-item-template>
+                  <span md-highlight-text="point.searchText">{{item.name + " (" + item._tollRoad.name + ")"}}</span>
+                </md-item-template>
+                <div ng-messages="dialog.form['wayPoint' + i].$error"
+                     ng-if="dialog.form['wayPoint' + i].$touched">
+                  <div ng-message="md-require-match">Please select an existing WayPoint.</div>
+                  <div ng-message="md-required">Please select an existing WayPoint.</div>
+                </div>
+              </md-autocomplete>
+              <i ng-show="dialog.endWayPoints.length > 2 || (dialog.endWayPoints.length > 1 && dialog.startWayPoints.length >= 2)"
+                 md-no-asterisk
+                 ng-click="dialog.deleteEndPoint(i)"
+                 class="fa fa-trash"></i>
+            </div>
+            <div layout="row" layout-align="start center">
+              <span></span>
+              <md-button ng-click="dialog.addEndPoint()"
+                         ng-show="dialog.endWayPoints.length != dialog.points.length">
+                Add end WayPoint to matrix
+              </md-button>
+            </div>
+            <!--<pre>
+              {{dialog.selectedPoints | json}}
+            </pre>-->
+          </div>
         </div>
-        <div layout="row" layout-align="space-between center">
-          <span></span>
-          <md-button ng-click="dialog.addPoint()"
-                     ng-show="dialog.selectedPoints.length != dialog.points.length">
-            Add WayPoint to matrix
-          </md-button>
-        </div>
-        <!--<pre>
-          {{dialog.selectedPoints | json}}
-        </pre>-->
       </div>
     </md-dialog-content>
     <md-dialog-actions class="modal-buttons" layout="row">
