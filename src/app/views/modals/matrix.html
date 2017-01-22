@@ -25,10 +25,10 @@
             <div ng-message="required">This field is required</div>
           </div>
         </md-input-container>
-        <div layout="row" layout-align="space-between start">
+        <div layout="row" layout-align="space-between start" layout-xs="column" layout-align-xs="center center">
 
           <div>
-            <h3>Choose start WayPoints</h3>
+            <h3 class="title">Choose start WayPoints</h3>
             <div ng-repeat="point in dialog.startWayPoints track by $index"
                  class="wayPointWrapper"
                  ng-init="i = $index">
@@ -70,7 +70,7 @@
             </pre>-->
           </div>
           <div>
-            <h3>Choose end WayPoints</h3>
+            <h3 class="title">Choose end WayPoints</h3>
             <div ng-repeat="point in dialog.endWayPoints track by $index"
                  class="wayPointWrapper"
                  ng-init="i = $index">

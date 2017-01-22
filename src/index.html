@@ -28,14 +28,18 @@
     <div ng-controller="RootController as root">
       <div layout="row"
            layout-align="space-between"
-           class="rootHeader">
-        <md-button ui-sref="roadList">
-          <h2>TollMinder Admin</h2>
-        </md-button>
-        <div layout="row" layout-align="center center">
-          <md-button ui-sref="roadList" ui-sref-active="active">Roads</md-button>
-          <md-button ui-sref="rates" ui-sref-active="active">Rates</md-button>
-          <md-button ng-click="root.logout()">Logout</md-button>
+           class="rootHeader"
+           layout-xs="column">
+        <div layout="row" layout-xs="row" layout-align-xs="space-between" class="top-heeder">
+          <md-button ui-sref="roadList">
+            <h2>TollMinder Admin</h2>
+          </md-button>
+          <a hide-gt-xs class="top-heeder-button" ng-click="collapse = !collapse"></a>
+        </div>
+        <div layout="row" layout-align="center center" layout-xs="column" ng-class="{ 'hidden': ! collapse }">
+          <md-button ui-sref="roadList" ui-sref-active="active" layout-xs="column" hide-xs>Roads</md-button>
+          <md-button ui-sref="rates" ui-sref-active="active" layout-xs="column" hide-xs>Rates</md-button>
+          <md-button ng-click="root.logout()" layout-xs="column" hide-xs>Logout</md-button>
         </div>
       </div>
       <div ui-view></div>

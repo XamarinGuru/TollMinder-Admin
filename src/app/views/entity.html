@@ -6,8 +6,8 @@
              ui-sref="roadList">to road list</md-button>
   <md-button ng-if="ctrl.state.current.name == 'wayPoint'"
              ui-sref="tollRoad({_id: ctrl.data._tollRoad._id})">to {{ctrl.data._tollRoad.name}}</md-button>
-  <div layout="row" layout-align="space-between center">
-    <div>
+  <div layout="row" layout-xs="column" layout-align="space-between center">
+    <div class="xs-center">
       <h2><strong class="capitalize">{{ctrl.state.current.name}}</strong> : {{ctrl.data.name}}</h2>
       <i>Created at: {{ctrl.data.createdAt | date}}</i><br/>
       <i ng-if="ctrl.data.updatedAt">Last update: {{ctrl.data.updatedAt | date}}</i>
@@ -39,6 +39,7 @@
     </div>
   </div>
   <hr>
+  <md-table-container>
   <table md-table>
     <thead md-head>
     <tr md-row>
