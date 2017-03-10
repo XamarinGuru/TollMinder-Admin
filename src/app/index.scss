@@ -4,7 +4,7 @@
  */
 // bower:scss
 // endbower
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
 
 @font-face {
   font-family: 'Material Icons';
@@ -279,7 +279,7 @@ md-dialog {
     .md-button, h2 {
       line-height: 20px;
       margin: 5px 0;
-      min-height: 23px;  
+      min-height: 23px;
     }
   }
   .xs-center {
@@ -343,7 +343,7 @@ md-dialog {
     position: relative;
     z-index: 1;
     transition: all 1s;
-    .hide-xs:not(.show-xs):not(.show), 
+    .hide-xs:not(.show-xs):not(.show),
     .hide:not(.show-xs):not(.show) {
       visibility: visible;
       display: flex;
