@@ -27,7 +27,7 @@ angular.module('tollminderAdmin',
 
 .constant('API', 'http://54.152.103.212/api')
 // .constant('API', 'http://localhost:7000/api')
-.constant('G_API_Key', 'AIzaSyA3bW45fzOFxRkt23VXQlG0W7Oy9Ud8M_g')
+.constant('G_API_Key', 'AIzaSyBSZHGOQA4JvBopP9-IPn2EORedB7MIJNc')
 
 .config(config)
 .config(routerConfig)
